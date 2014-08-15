@@ -6,6 +6,7 @@
 
 package gtd.Views;
 
+import gtd.Controllers.MainController;
 import gtd.Views.Modules.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,9 +21,9 @@ public class MainView extends JFrame {
     private static final Dimension WINDOWSIZE = new Dimension(800, 600);
     private static final String TITLE = "Getting Things Done";
     private static final Color BGCOLOR = new Color(240,240,255);
-    //private static HeaderView Header = new HeaderView();
-    private static MenuView Menu = new MenuView();
-    private static ContentView Content = new ContentView();
+    //private static HeaderView Header = new HeaderView(this);
+    private final MenuView Menu = new MenuView(this);
+    private final ContentView Content = new ContentView(this);
     
     /**
      * Constructor
@@ -52,4 +53,20 @@ public class MainView extends JFrame {
         // Add content
         this.add(Content, BorderLayout.CENTER);
     }    
+    
+    public void loadThoughts() {
+        System.out.println(MainController.getInstance().doSomething());
+    }
+    public void loadActions() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void loadProjects() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void loadContexts() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

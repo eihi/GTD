@@ -6,6 +6,7 @@
 
 package gtd.Views.Modules;
 
+import gtd.Views.MainView;
 import javax.swing.JPanel;
 
 /**
@@ -13,5 +14,12 @@ import javax.swing.JPanel;
  * @author st
  */
 public class ContentView extends JPanel {
+    
+    private final MainView mainView;
+    
+    public ContentView(MainView mainView) {
+        this.mainView = mainView;
+    }
+    
     
 }

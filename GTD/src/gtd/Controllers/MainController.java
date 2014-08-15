@@ -22,23 +22,54 @@ public class MainController {
     private final ArrayList<Thought> thoughts;
     private final ArrayList<Context> contexts;
     private final ArrayList<Status> statuses;
-    private final MainView mainview;
+    //private static final MainView mainview;
+    private static final MainController instance = new MainController();
     
     /**
      * Constructor
-     * @param mainview
      */
-    public MainController(MainView mainview) {
+    private MainController() {
         // Initialize models
         this.actions = new ArrayList<>();
         this.projects = new ArrayList<>();
         this.thoughts = new ArrayList<>();
         this.contexts = new ArrayList<>();
         this.statuses = new ArrayList<>();
+    }
+    
+    public static MainController getInstance() {
+        return instance;
+    }
+    
+    public String doSomething() {
+        return "You wanted me to do something, so I did!";
+    }
+    
+    public ArrayList<Action> getActions() {
+        return this.actions;
+    }
+    
+    public ArrayList<Project> getProjects() {
+        return this.projects;
+    }
+    
+    public ArrayList<Thought> getThoughts() {
+        return this.thoughts;
+    }
+    
+    public ArrayList<Context> getContexts() {
+        return this.contexts;
+    }
+    
+    public ArrayList<Status> getStatuses() {
+        return this.statuses;
+    }
+    
+    public void refresh() {
         
-        // Initialize view
-        this.mainview = mainview;
+    }
+    
+    private void loadData() {
         
-        //this.mainview.a
-    }    
+    }
 }

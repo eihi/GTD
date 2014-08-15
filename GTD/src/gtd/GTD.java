@@ -14,20 +14,17 @@ import gtd.Views.MainView;
  * @author st
  */
 public class GTD {
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
         // Create main view
-        MainView mainview = new MainView();
-        
-        // Create main controller
-        MainController maincontroller = new MainController(mainview);
+        MainView mainView = new MainView();
         
         // Show view
-        mainview.setVisible(true);
+        mainView.setVisible(true);
     }
     
 }

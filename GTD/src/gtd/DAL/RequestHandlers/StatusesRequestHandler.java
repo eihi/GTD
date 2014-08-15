@@ -10,6 +10,6 @@ package gtd.DAL.RequestHandlers;
  *
  * @author st
  */
-public class StatusRequestHandler {
+public class StatusesRequestHandler {
     
 }
