@@ -7,6 +7,7 @@
 package gtd.Views;
 
 import gtd.Controllers.MainController;
+import gtd.Models.GTD;
 import gtd.Views.Modules.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -24,13 +25,15 @@ public class MainView extends JFrame {
     //private static HeaderView Header = new HeaderView(this);
     private final MenuView Menu = new MenuView(this);
     private final ContentView Content = new ContentView(this);
+    private final GTD gtd;
     
     /**
      * Constructor
      */
-    public MainView() {
+    public MainView(GTD gtd) {
         
         super(TITLE);
+        this.gtd = gtd;
         initMainView();
     }
 
