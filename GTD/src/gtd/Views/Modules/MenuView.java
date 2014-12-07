@@ -21,14 +21,14 @@ import javax.swing.border.EmptyBorder;
  *
  * @author st
  */
-public class MenuView extends JPanel implements ActionListener {
+public class MenuView extends JPanel {
     
     private final MainView mainView;
     
-    public static JButton btnThoughts;
-    public static JButton btnActions;
-    public static JButton btnProjects;
-    public static JButton btnContexts;
+    public JButton btnThoughts;
+    public JButton btnActions;
+    public JButton btnProjects;
+    public JButton btnContexts;
     
     private static final Color BGCOLOR = new Color(219,219,234);
     
@@ -52,34 +52,7 @@ public class MenuView extends JPanel implements ActionListener {
     private JButton makeButton(String commando)
     {
         JButton button = new MenuButton(commando);
-        button.addActionListener(this);
         //button.setFont(MENU_FONT);
-        
         return button;
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        keyPressed(e.getActionCommand());
-    }
-
-    private void keyPressed(String actionCommand) {
-        switch(actionCommand){
-            case "Thoughts":
-                mainView.loadThoughts();
-                break;
-            case "Actions":
-                mainView.loadActions();
-                break;
-            case "Projects":
-                mainView.loadProjects();
-                break;
-            case "Contexts":
-                mainView.loadContexts();
-                break;
-            default:
-                System.out.println(actionCommand);
-                break;
-        }
-    }   
 }

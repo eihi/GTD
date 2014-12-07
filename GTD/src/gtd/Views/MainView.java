@@ -12,28 +12,29 @@ import gtd.Views.Modules.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JFrame;
 
 /**
  *
  * @author st
  */
-public class MainView extends JFrame {
+public class MainView extends JFrame implements Observer {
     private static final Dimension WINDOWSIZE = new Dimension(800, 600);
     private static final String TITLE = "Getting Things Done";
     private static final Color BGCOLOR = new Color(240,240,255);
     //private static HeaderView Header = new HeaderView(this);
-    private final MenuView Menu = new MenuView(this);
-    private final ContentView Content = new ContentView(this);
-    private final GTD gtd;
+    private MenuView Menu;
+    private ContentView Content;
     
     /**
      * Constructor
      */
-    public MainView(GTD gtd) {
+    public MainView() {
         
         super(TITLE);
-        this.gtd = gtd;
         initMainView();
     }
 
@@ -50,26 +51,30 @@ public class MainView extends JFrame {
         // Add header
         // this.add(Header, BorderLayout.NORTH);
         
-        // Add menu
+        // Create menu and add to view
+        Menu = new MenuView(this);
         this.add(Menu, BorderLayout.WEST);
         
-        // Add content
+        // Create content and add to view
+        Content = new ContentView(this);
         this.add(Content, BorderLayout.CENTER);
     }    
-    
-    public void loadThoughts() {
-        System.out.println(MainController.getInstance().doSomething());
-    }
-    public void loadActions() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void loadProjects() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    	
+    public void addController(ActionListener controller){
+            System.out.println("View      : adding controller");
+            Menu.btnActions.addActionListener(controller);
+            Menu.btnContexts.addActionListener(controller);
+            Menu.btnProjects.addActionListener(controller);
+            Menu.btnThoughts.addActionListener(controller);
     }
 
-    public void loadContexts() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public void update(Observable o, Object arg) {
+        //who called us and what did they send?
+        System.out.println ("View      : Observable is " + o.getClass() + ", object passed is " + o.getClass());
+        
+        //model Push 
+        //parse obj
+        //myTextField.setText("" + ((Integer)obj).intValue());	//obj is an Object, need to cast to an Integer
     }
-
 }

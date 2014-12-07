@@ -20,17 +20,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Create model
+        // Create model and view
         GTD gtd = new GTD();
+        MainView view = new MainView();
         
-        // Create view
-        MainView view = new MainView(gtd);
+        // Tell model about view
+        gtd.addObserver(view);
         
-        // Create controller
-        MainController controller = new MainController(gtd);
+        // Create controller, tell it about model and view, initialize model
+        MainController controller = new MainController();
+        controller.addModel(gtd);
+        controller.addView(view);
+        //controller.initModel(start_value);
         
         // Show view
         view.setVisible(true);
     }
-    
 }

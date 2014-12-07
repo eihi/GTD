@@ -9,77 +9,67 @@ package gtd.Controllers;
 import gtd.DAL.*;
 import gtd.Models.*;
 import gtd.Views.*;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
  *
  * @author st
  */
-public class MainController {
+public class MainController implements ActionListener {
     // Properties
-    private final ArrayList<Action> actions;
-    private final ArrayList<Project> projects;
-    private final ArrayList<Thought> thoughts;
-    private final ArrayList<Context> contexts;
-    private final ArrayList<Status> statuses;
-    //private static final MainView mainview;
-    private static final MainController instance = new MainController();
+    private GTD gtd;
+    private MainView view;
     
     /**
      * Constructor
      */
-    private MainController() {
-        // Initialize models
-        this.actions = new ArrayList<>();
-        this.projects = new ArrayList<>();
-        this.thoughts = new ArrayList<>();
-        this.contexts = new ArrayList<>();
-        this.statuses = new ArrayList<>();
+    public MainController() {
+        
     }
-    
-    public static MainController getInstance() {
-        return instance;
+    public void actionPerformed(java.awt.event.ActionEvent e){
+		
+        System.out.println ("Controller: The " + e.getActionCommand() 
+                + " button is clicked at " + new java.util.Date(e.getWhen())
+                + " with e.paramString " + e.paramString() );
+
+        System.out.println("Controller: acting on Model");
+        
+        switch(e.getActionCommand()){
+            case "Thoughts":
+                DBConnector dbc = new DBConnector();
+                String result = "";
+                try {
+                    ResultSet rs = dbc.query("SELECT * FROM thoughts");
+                    while (rs.next())
+                        result = dbc.query("SELECT * FROM thoughts").getString(2);
+                }
+                catch(Exception excp) {
+                    System.out.println(excp);
+                }
+                System.out.println(result);
+                break;
+            default:
+                break;
+        }
+    }
+    private void loadData() {
+        // Load data if there is a dataconnection
     }
 
-    public MainController(GTD gtd) {
-        // Initialize models
-        this.actions = new ArrayList<>();
-        this.projects = new ArrayList<>();
-        this.thoughts = new ArrayList<>();
-        this.contexts = new ArrayList<>();
-        this.statuses = new ArrayList<>();
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addModel(GTD gtd){
+        System.out.println("Controller: adding model");
+        this.gtd = gtd;
+    } 
+
+    public void addView(MainView view) {
+        System.out.println("Controller: adding view");
+        this.view = view;
+        addViewController();
     }
     
-    public String doSomething() {
-        return "You wanted me to do something, so I did!";
-    }
-    
-    public ArrayList<Action> getActions() {
-        return this.actions;
-    }
-    
-    public ArrayList<Project> getProjects() {
-        return this.projects;
-    }
-    
-    public ArrayList<Thought> getThoughts() {
-        return this.thoughts;
-    }
-    
-    public ArrayList<Context> getContexts() {
-        return this.contexts;
-    }
-    
-    public ArrayList<Status> getStatuses() {
-        return this.statuses;
-    }
-    
-    public void refresh() {
-        
-    }
-    
-    private void loadData() {
-        
+    public void addViewController(){
+        this.view.addController(this);
     }
 }

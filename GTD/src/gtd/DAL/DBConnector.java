@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
+
 package gtd.DAL;
 
 import com.mysql.jdbc.Connection;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author ST
  */
-/*
+
 public class DBConnector {
     private Connection con;
     
@@ -29,15 +29,19 @@ public class DBConnector {
             Logger.getLogger(Connection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public boolean isConnected(){
+        return this.con != null;
+    }
     
-    public ResultSet query(String query) throws SQLException {
+    public ResultSet query(String query) throws SQLException{
         Statement stmt = (Statement) this.con.createStatement();
-        try {        
+        try {
             return stmt.executeQuery(query);
-        } catch (SQLException ex) {
+        } catch(SQLException ex) {
             Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 }
-*/
+
