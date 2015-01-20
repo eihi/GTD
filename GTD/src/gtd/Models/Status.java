@@ -6,13 +6,15 @@
 
 package gtd.Models;
 
+import java.util.Observable;
+
 /**
  *
  * @author st
  */
-public class Status {
+public class Status extends Observable {
     // Properties
-    private final int id;
+    private int id;
     private String name;
     
     /**
@@ -20,7 +22,7 @@ public class Status {
      */
     public Status() {
         // Initialize fields
-        this.id = 0;
+        this.id = -1;
         this.name = "";
     }
     
@@ -55,6 +57,8 @@ public class Status {
      */
     public void setName(String name) {
         this.name = name;
+        setChanged();
+        notifyObservers(this);
     }
     
 }

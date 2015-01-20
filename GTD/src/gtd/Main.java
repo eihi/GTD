@@ -7,7 +7,6 @@
 package gtd;
 
 import gtd.Controllers.*;
-import gtd.Models.GTD;
 import gtd.Views.MainView;
 
 /**
@@ -20,18 +19,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // Create model and view
-        GTD gtd = new GTD();
+                
+        // Create view
         MainView view = new MainView();
         
-        // Tell model about view
-        gtd.addObserver(view);
-        
-        // Create controller, tell it about model and view, initialize model
+        // Create controller, tell it about view
         MainController controller = new MainController();
-        controller.addModel(gtd);
         controller.addView(view);
-        //controller.initModel(start_value);
+        controller.loadTable();
         
         // Show view
         view.setVisible(true);

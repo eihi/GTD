@@ -6,22 +6,23 @@
 
 package gtd.Models;
 
+import java.util.Observable;
+
 /**
  *
  * @author st
  */
-public class Project {
+public class Project extends Observable {
     // Properties
-    private final int id;
-    private String name;
-    private String notes;
+    private int id;
+    private String name, notes;
     
     /**
      * Contructor
      */
     public Project() {
         // Initialize fields
-        this.id = 0;
+        this.id = -1;
         this.name = "";
         this.notes = "";
     }
@@ -30,7 +31,7 @@ public class Project {
         this.id = id;
         this.name = name;
         this.notes = notes;
-    }    
+    }
 
     /**
      * @return the id
@@ -51,6 +52,8 @@ public class Project {
      */
     public void setName(String name) {
         this.name = name;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
@@ -65,5 +68,7 @@ public class Project {
      */
     public void setNotes(String notes) {
         this.notes = notes;
+        setChanged();
+        notifyObservers(this);
     }
 }

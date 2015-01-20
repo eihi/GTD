@@ -6,18 +6,20 @@
 
 package gtd.Models;
 
+import java.util.Observable;
+
 /**
  *
  * @author st
  */
-public class Context {
+public class Context extends Observable {
     // Properties
-    private final int id;
+    private int id;
     private String name;
     
     public Context() {
         // Initialize fields
-        this.id = 0;
+        this.id = -1;
         this.name = "";
     }
     
@@ -45,6 +47,8 @@ public class Context {
      */
     public void setName(String name) {
         this.name = name;
+        setChanged();
+        notifyObservers(this);
     }
     
 }

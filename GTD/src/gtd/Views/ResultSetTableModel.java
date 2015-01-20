@@ -1,6 +1,6 @@
 // Fig. 25.28: ResultSetTableModel.java
 // A TableModel that supplies ResultSet data to a JTable.
-package gtd.Helperclasses;
+package gtd.Views;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;

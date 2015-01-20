@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gtd.Views.Modules;
+package gtd.Views;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,16 +17,17 @@ import javax.swing.border.EmptyBorder;
  *
  * @author st
  */
-public class MenuButton extends JButton {
+public class HeaderButton extends JButton {
     private static final Color FGCOLOR = new Color(83,83,98);
     
-    public MenuButton(String t){
+    public HeaderButton(String t){
         this.setText(t);
-        this.setPreferredSize(new Dimension(250,48));
-        this.setHorizontalAlignment(SwingConstants.LEFT);
+        this.setPreferredSize(new Dimension(50,48));
+        this.setHorizontalAlignment(SwingConstants.CENTER);
+        this.setVerticalAlignment(SwingConstants.CENTER);
         this.setBackground(null);
         this.setFont(getFont().deriveFont(Font.PLAIN, 24));
-        this.setBorder(new EmptyBorder(5, 20, 5, 5));
+        this.setBorder(new EmptyBorder(5, 5, 5, 5));
         this.setFocusPainted(false);
         
         this.addMouseListener(new java.awt.event.MouseAdapter() {

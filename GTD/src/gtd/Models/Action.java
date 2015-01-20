@@ -8,22 +8,18 @@ package gtd.Models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Observable;
 
 /**
  *
  * @author st
  */
-public class Action {
+public class Action extends Observable{
     // Properties
-    private final int id;
-    private String description;
-    private String notes;
-    private int status_id;
-    private int context_id;
-    private int project_id;
+    private String description, notes;
+    private int id, status_id, context_id, project_id;
     private SimpleDateFormat date_format;
-    private Date action_date;
-    private Date statuschange_date;
+    private Date action_date, statuschange_date;
     private boolean done;
     
     /**
@@ -31,7 +27,7 @@ public class Action {
      */
     public Action() {
         // Initialize fields
-        this.id = 0;
+        this.id = -1;
         this.description = "";
         this.notes = "";
         this.status_id = 0;
@@ -86,6 +82,8 @@ public class Action {
      */
     public void setDescription(String description) {
         this.description = description;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
@@ -100,6 +98,8 @@ public class Action {
      */
     public void setNotes(String notes) {
         this.notes = notes;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
@@ -114,6 +114,8 @@ public class Action {
      */
     public void setStatus_id(int status_id) {
         this.status_id = status_id;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
@@ -126,22 +128,26 @@ public class Action {
     /**
      * @param context_id the context_id to set
      */
-    public void setContext_id(int context_id) {
+    public void setContextId(int context_id) {
         this.context_id = context_id;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
      * @return the project_id
      */
-    public int getProject_id() {
+    public int getProjectId() {
         return project_id;
     }
 
     /**
      * @param project_id the project_id to set
      */
-    public void setProject_id(int project_id) {
+    public void setProjectId(int project_id) {
         this.project_id = project_id;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
@@ -161,29 +167,33 @@ public class Action {
     /**
      * @return the action_date
      */
-    public Date getAction_date() {
+    public Date getActionDate() {
         return action_date;
     }
 
     /**
      * @param action_date the action_date to set
      */
-    public void setAction_date(Date action_date) {
+    public void setActionDate(Date action_date) {
         this.action_date = action_date;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
      * @return the statuschange_date
      */
-    public Date getStatuschange_date() {
+    public Date getStatuschangeDate() {
         return statuschange_date;
     }
 
     /**
      * @param statuschange_date the statuschange_date to set
      */
-    public void setStatuschange_date(Date statuschange_date) {
+    public void setStatuschangeDate(Date statuschange_date) {
         this.statuschange_date = statuschange_date;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
@@ -198,5 +208,7 @@ public class Action {
      */
     public void setDone(boolean done) {
         this.done = done;
+        setChanged();
+        notifyObservers(this);
     }
 }

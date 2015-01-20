@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gtd.Views.Modules;
+package gtd.Views;
 
 import gtd.Controllers.MainController;
 import gtd.Views.MainView;
@@ -29,6 +29,7 @@ public class MenuView extends JPanel {
     public JButton btnActions;
     public JButton btnProjects;
     public JButton btnContexts;
+    public JButton btnStatuses;
     
     private static final Color BGCOLOR = new Color(219,219,234);
     
@@ -43,16 +44,16 @@ public class MenuView extends JPanel {
         setPreferredSize(new Dimension(250, super.getHeight()));
         setBorder(new EmptyBorder(16,0,0,0));
         
-        add(btnThoughts = makeButton("Thoughts"));
         add(btnActions = makeButton("Actions"));
+        add(btnThoughts = makeButton("Thoughts"));
         add(btnProjects = makeButton("Projects"));
         add(btnContexts = makeButton("Contexts"));
+        add(btnStatuses = makeButton("Statuses"));
     }
     
     private JButton makeButton(String commando)
     {
         JButton button = new MenuButton(commando);
-        //button.setFont(MENU_FONT);
         return button;
     }
 }

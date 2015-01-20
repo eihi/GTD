@@ -6,13 +6,15 @@
 
 package gtd.Models;
 
+import java.util.Observable;
+
 /**
  *
  * @author st
  */
-public class Thought {
+public class Thought extends Observable {
     // Properties
-    private final int id;
+    private int id;
     private String notes;
     
     /**
@@ -20,7 +22,7 @@ public class Thought {
      */
     public Thought() {
         // Initialize fields
-        this.id = 0;
+        this.id = -1;
         this.notes = "";
     }
     
@@ -55,5 +57,7 @@ public class Thought {
      */
     public void setNotes(String notes) {
         this.notes = notes;
+        setChanged();
+        notifyObservers(this);
     }
 }
