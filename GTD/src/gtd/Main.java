@@ -6,8 +6,11 @@
 
 package gtd;
 
-import gtd.Controllers.*;
-import gtd.Views.MainView;
+import gtd.controller.MainController;
+import gtd.view.MainView;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +29,11 @@ public class Main {
         // Create controller, tell it about view
         MainController controller = new MainController();
         controller.addView(view);
-        controller.loadTable();
+        try {
+            controller.loadActions();
+        } catch (SQLException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // Show view
         view.setVisible(true);

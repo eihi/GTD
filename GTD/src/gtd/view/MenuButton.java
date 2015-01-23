@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gtd.Views;
+package gtd.view;
 
 import gtd.Config;
 import java.awt.Color;

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gtd.Models;
+package gtd.model;
 
 import java.util.Observable;
 
@@ -12,30 +12,36 @@ import java.util.Observable;
  *
  * @author st
  */
-public class Thought extends Observable {
+public class Status extends Observable {
     // Properties
     private int id;
-    private String notes;
+    private String name;
     
     /**
      * Constructor
      */
-    public Thought() {
+    public Status() {
         // Initialize fields
-        this.id = -1;
-        this.notes = "";
+        this.id = 0;
+        this.name = "";
+    }
+    
+    public Status(String name) {
+        // Initialize fields
+        super();
+        this.name = name;
     }
     
     /**
      * Constructor
      * @param id
-     * @param notes 
+     * @param name 
      */
-    public Thought(int id, String notes) {
+    public Status(int id, String name) {
         // Initialize fields
         super();
         this.id = id;
-        this.notes = notes;
+        this.name = name;
     }
 
     /**
@@ -46,18 +52,19 @@ public class Thought extends Observable {
     }
 
     /**
-     * @return the notes
+     * @return the name
      */
-    public String getNotes() {
-        return notes;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param notes the notes to set
+     * @param name the name to set
      */
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setName(String name) {
+        this.name = name;
         setChanged();
         notifyObservers(this);
     }
+    
 }

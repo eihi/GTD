@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gtd.Models;
+package gtd.model;
 
 import java.util.Observable;
 
@@ -19,8 +19,13 @@ public class Context extends Observable {
     
     public Context() {
         // Initialize fields
-        this.id = -1;
+        this.id = 0;
         this.name = "";
+    }
+    
+    public Context(String name) {
+        this();
+        this.name = name;
     }
     
     public Context(int id, String name) {

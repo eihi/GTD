@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-package gtd.Views;
+package gtd.view;
 
-import gtd.Controllers.MainController;
-import gtd.Views.MainView;
+import gtd.controller.MainController;
+import gtd.view.MainView;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -25,11 +25,11 @@ public class MenuView extends JPanel {
     
     private final MainView mainView;
     
-    public JButton btnThoughts;
-    public JButton btnActions;
-    public JButton btnProjects;
-    public JButton btnContexts;
-    public JButton btnStatuses;
+    public JButton thoughtsButton;
+    public JButton actionsButton;
+    public JButton projectsButton;
+    public JButton contextsButton;
+    public JButton statusesButton;
     
     private static final Color BGCOLOR = new Color(219,219,234);
     
@@ -44,11 +44,11 @@ public class MenuView extends JPanel {
         setPreferredSize(new Dimension(250, super.getHeight()));
         setBorder(new EmptyBorder(16,0,0,0));
         
-        add(btnActions = makeButton("Actions"));
-        add(btnThoughts = makeButton("Thoughts"));
-        add(btnProjects = makeButton("Projects"));
-        add(btnContexts = makeButton("Contexts"));
-        add(btnStatuses = makeButton("Statuses"));
+        add(actionsButton = makeButton("Actions"));
+        add(thoughtsButton = makeButton("Thoughts"));
+        add(projectsButton = makeButton("Projects"));
+        add(contextsButton = makeButton("Contexts"));
+        add(statusesButton = makeButton("Statuses"));
     }
     
     private JButton makeButton(String commando)

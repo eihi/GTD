@@ -3,18 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gtd.Controllers;
+package gtd.controller;
 
-import gtd.Models.Project;
-import gtd.Models.Thought;
-import gtd.Models.Context;
-import gtd.Models.Action;
-import gtd.Models.Status;
+import gtd.model.Project;
+import gtd.model.Thought;
+import gtd.model.Context;
+import gtd.model.Action;
+import gtd.model.Status;
 import gtd.Config;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -37,6 +40,38 @@ public class DatabaseController {
         return databaseController;
     }
 
+    public int getIdByName(String table, String name) {
+        String query = "SELECT t.id FROM " + table + " t WHERE t.name = '" + name + "' LIMIT 1";
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
+
+            if (rs != null) {
+                while (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+    
+    public String getNameById(String table, int id) {
+        String query = "SELECT t.name FROM " + table + " t WHERE t.id = " + id + " LIMIT 1";
+        try {
+            ResultSet rs = this.connection.createStatement().executeQuery(query);
+
+            if (rs != null) {
+                while (rs.next()) {
+                    return rs.getString("name");
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return "";
+    }
+
     public boolean connect() {
         try {
             connection = DriverManager.getConnection(Config.DATABASE_URL, Config.USERNAME, Config.PASSWORD);
@@ -53,7 +88,9 @@ public class DatabaseController {
 
     public boolean executeUpdate(String query) throws SQLException {
         if (isConnected()) // Execute query if connected
+        {
             connection.createStatement().executeUpdate(query);
+        }
 
         return true;
     }
@@ -62,25 +99,27 @@ public class DatabaseController {
         String query = "SELECT * FROM " + name; // Build query
 
         if (connect() && isConnected()) // Execute query if connected
+        {
             return connection.createStatement().executeQuery(query);
+        }
 
         return null;
     }
 
     public boolean create(Action entity) throws SQLException {
-        String query = "CALL CreateAction('" + entity.getDescription() + "', '" + entity.getNotes() + "', '" + entity.getActionDate() + "', '" + entity.getStatuschangeDate() + "', '" + (entity.isDone() ? "1" : "0") + "', '" + entity.getProjectId() + "', '" + entity.getContext_id() + "', '" + entity.getStatus_id() + "')";
+        String query = "CALL CreateAction('" + entity.getDescription() + "', '" + entity.getNotes() + "', '" + entity.getActionDateString() + "', '" + entity.getStatusChangeDateString() + "', " + (entity.isDone() ? "1" : "0") + ", " + entity.getProjectId() + ", " + entity.getContext_id() + ", " + entity.getStatus_id() + ")";
 
         return executeUpdate(query);
     }
-    
+
     public boolean read(int id, String table, String column) throws SQLException {
         String query = "SELECT t." + column + " FROM " + table + " t WHERE t.id = " + id;
-        
+
         return executeUpdate(query);
     }
 
     public boolean update(Action entity) throws SQLException {
-        String query = "CALL UpdateAction('" + entity.getId() + "', " + entity.getDescription() + "', '" + entity.getNotes() + "', '" + entity.getActionDate() + "', '" + entity.getStatuschangeDate() + "', '" + (entity.isDone() ? "1" : "0") + "', '" + entity.getProjectId() + "', '" + entity.getContext_id() + "', '" + entity.getStatus_id() + "')";
+        String query = "CALL UpdateAction(" + entity.getId() + ", '" + entity.getDescription() + "', '" + entity.getNotes() + "', '" + entity.getActionDateString() + "', '" + entity.getStatusChangeDateString() + "', " + (entity.isDone() ? "1" : "0") + ", " + entity.getProjectId() + ", " + entity.getContext_id() + ", " + entity.getStatus_id() + ")";
 
         return executeUpdate(query);
     }

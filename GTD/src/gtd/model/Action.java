@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gtd.Models;
+package gtd.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +27,7 @@ public class Action extends Observable{
      */
     public Action() {
         // Initialize fields
-        this.id = -1;
+        this.id = 0;
         this.description = "";
         this.notes = "";
         this.status_id = 0;
@@ -36,6 +36,17 @@ public class Action extends Observable{
         this.action_date = new Date();
         this.statuschange_date = new Date();
         this.done = false;
+    }
+    public Action(String description, String notes, int status_id, int context_id, int project_id, Date action_date, Date statuschange_date, boolean done) {
+        super();
+        this.description = description;
+        this.notes = notes != null ? notes : "";
+        this.status_id = status_id;
+        this.context_id = context_id;
+        this.project_id = project_id;
+        this.action_date = action_date;
+        this.statuschange_date = statuschange_date;
+        this.done = done;
     }
     
     /**
@@ -53,7 +64,7 @@ public class Action extends Observable{
     public Action(int id, String description, String notes, int status_id, int context_id, int project_id, Date action_date, Date statuschange_date, boolean done) {
         super();
         this.id = id;
-        this.description = description != null ? description : "";
+        this.description = description;
         this.notes = notes != null ? notes : "";
         this.status_id = status_id;
         this.context_id = context_id;
@@ -170,6 +181,11 @@ public class Action extends Observable{
     public Date getActionDate() {
         return action_date;
     }
+    
+    public String getActionDateString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(action_date);
+    }
 
     /**
      * @param action_date the action_date to set
@@ -185,6 +201,11 @@ public class Action extends Observable{
      */
     public Date getStatuschangeDate() {
         return statuschange_date;
+    }
+    
+    public String getStatusChangeDateString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(statuschange_date);
     }
 
     /**
